@@ -1,4 +1,3 @@
-import './App.css';
 import React, { useState, useEffect, useRef } from 'react';
 import Header from './components/Header/Header';
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
@@ -44,17 +43,23 @@ function App() {
 
   useEffect(()=>{
     const userls = localStorage.getItem('__USER__');
-    const userd = JSON.parse(userls)
-    localStorage.setItem('__USER__', JSON.stringify(users)) //To always display at least one user in the users page
-    localStorage.setItem('__PROFILE__', JSON.stringify(profiledata)) //To store the profile data
-    
+    const userd = JSON.parse(userls);
     const profilels = localStorage.getItem('__PROFILE__');
     const profiled = JSON.parse(profilels)
-    
+    localStorage.setItem('__USER__', JSON.stringify(users)) //To always display at least one user in the users page
+    localStorage.setItem('__PROFILE__', JSON.stringify(profiledata)) //To store the profile data
+        
     if(userlist?.length !== userd?.length) {
       setUserList(userd)
     }
-    setProfile(profiled)
+    if(profile)
+    {
+      setProfile(profile)
+    }
+    else
+    {
+      setProfile(profiled)
+    }
     isMounted.current = true;
   },[])
 
